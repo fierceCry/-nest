@@ -8,4 +8,5 @@ export class UserDto extends JoinRequserDto{
     description : "아이디",
   })
   id: number;
+  
 }
