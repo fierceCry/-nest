@@ -6,6 +6,6 @@ export class AppService {
   constructor(private readonly configService: ConfigService) {}
 
   getHello(): string {
-    return this.configService.get("NAVE");
+    return this.configService.get("MAIN_LOCALHOST_NAVE");
   }
 }
