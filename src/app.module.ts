@@ -48,9 +48,9 @@ console.log(process.env.DB_DATABASE)
         WorkspaceMembers,
         Workspaces,
       ],
-      synchronize : true,
+      keepConnectionAlive : true,
+      synchronize : false,
       logging : true,
-      keepConnectionAlive : false,
       migrations: [__dirname + '/migrations/*.ts'],
     })
   ],
