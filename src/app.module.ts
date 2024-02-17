@@ -21,9 +21,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-console.log(process.env.DB_USERNAME)
-console.log(process.env.DB_PASSWORD)
-console.log(process.env.DB_DATABASE)
 @Module({
   imports: [ConfigModule.forRoot( {isGlobal : true}),
      MorganModule, 
