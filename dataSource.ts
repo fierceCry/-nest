@@ -29,8 +29,7 @@ const dataSource = new DataSource({
     Workspaces,
   ],
   migrations: [__dirname + '/src/migrations/*.ts'],
-  synchronize: true,
+  synchronize: false,
   logging: true,
 });
-console.log(dataSource);
 export default dataSource;
