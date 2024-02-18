@@ -9,28 +9,51 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
-import { ChannelChats } from './ChannelChats';
-import { ChannelMembers } from './ChannelMembers';
-import { Channels } from './Channels';
-import { DMs } from './DMs';
-import { Mentions } from './Mentions';
-import { WorkspaceMembers } from './WorkspaceMembers';
-import { Workspaces } from './Workspaces';
-
-@Index('email', ['email'], { unique: true })
-@Entity({ schema: 'sleact', name: 'users' })
+} from "typeorm";
+import { ChannelChats } from "./ChannelChats";
+import { ChannelMembers } from "./ChannelMembers";
+import { Channels } from "./Channels";
+import { DMs } from "./DMs";
+import { Mentions } from "./Mentions";
+import { WorkspaceMembers } from "./WorkspaceMembers";
+import { Workspaces } from "./Workspaces";
+import { ApiProperty } from "@nestjs/swagger";
+import { IsEmail, IsNotEmpty, IsString } from "class-validator";
+@Index("email", ["email"], { unique: true })
+@Entity({ schema: "sleact", name: "users" })
 export class Users {
-  @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
+  @ApiProperty({
+    example : 1,
+    description : "id"
+  })
+  @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
 
-  @Column('varchar', { name: 'email', unique: true, length: 30 })
+  @IsString()
+  @IsEmail()
+  @ApiProperty({
+    example : "vlsual0917@gmail.com",
+    description : "이메일",
+  })
+  @Column("varchar", { name: "email", unique: true, length: 30 })
   email: string;
 
-  @Column('varchar', { name: 'nickname', length: 30 })
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty({
+    example : "Kimmangyu",
+    description : "닉네임",
+  })
+  @Column("varchar", { name: "nickname", length: 30 })
   nickname: string;
 
-  @Column('varchar', { name: 'password', length: 100, select: false })
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty({
+    example : "password",
+    description : "비밀번호",
+  })
+  @Column("varchar", { name: "password", length: 100, select: false })
   password: string;
 
   @CreateDateColumn()
@@ -71,28 +94,29 @@ export class Users {
 
   @ManyToMany(() => Workspaces, (workspaces) => workspaces.Members)
   @JoinTable({
-    name: 'workspacemembers',
+    name: "workspacemembers",
     joinColumn: {
-      name: 'UserId',
-      referencedColumnName: 'id',
+      name: "UserId",
+      referencedColumnName: "id",
     },
     inverseJoinColumn: {
-      name: 'WorkspaceId',
-      referencedColumnName: 'id',
+      name: "WorkspaceId",
+      referencedColumnName: "id",
     },
   })
   Workspaces: Workspaces[];
 
+
   @ManyToMany(() => Channels, (channels) => channels.Members)
   @JoinTable({
-    name: 'channelmembers',
+    name: "channelmembers",
     joinColumn: {
-      name: 'UserId',
-      referencedColumnName: 'id',
+      name: "UserId",
+      referencedColumnName: "id",
     },
     inverseJoinColumn: {
-      name: 'ChannelId',
-      referencedColumnName: 'id',
+      name: "ChannelId",
+      referencedColumnName: "id",
     },
   })
   Channels: Channels[];

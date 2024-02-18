@@ -1,23 +1,23 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
+import { Module } from "@nestjs/common";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
+import { ConfigModule } from "@nestjs/config";
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { MorganModule, MorganInterceptor } from "nest-morgan";
-import { UsersModule } from './users/users.module';
-import { WorkspacesModule } from './workspaces/workspaces.module';
-import { ChannelsModule } from './channels/channels.module';
-import { DmsModule } from './dms/dms.module';
-import { TypeOrmModule } from '@nestjs/typeorm'
-import { ChannelChats } from './entities/ChannelChats';
-import { ChannelMembers } from './entities/ChannelMembers';
-import { Channels } from './entities/Channels';
-import { DMs } from './entities/DMs';
-import { Mentions } from './entities/Mentions';
-import { Users } from './entities/Users';
-import { WorkspaceMembers } from './entities/WorkspaceMembers';
-import { Workspaces } from './entities/Workspaces';
-import dotenv from 'dotenv';
+import { UsersModule } from "./users/users.module";
+import { WorkspacesModule } from "./workspaces/workspaces.module";
+import { ChannelsModule } from "./channels/channels.module";
+import { DmsModule } from "./dms/dms.module";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { ChannelChats } from "./entities/ChannelChats";
+import { ChannelMembers } from "./entities/ChannelMembers";
+import { Channels } from "./entities/Channels";
+import { DMs } from "./entities/DMs";
+import { Mentions } from "./entities/Mentions";
+import { Users } from "./entities/Users";
+import { WorkspaceMembers } from "./entities/WorkspaceMembers";
+import { Workspaces } from "./entities/Workspaces";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -29,7 +29,7 @@ dotenv.config();
      ChannelsModule, 
      DmsModule,
      TypeOrmModule.forRoot({
-      type : 'mysql',
+      type : "mysql",
       host : "localhost",
       port : 3306,
       username: process.env.DB_USERNAME,
@@ -48,7 +48,7 @@ dotenv.config();
       keepConnectionAlive : true,
       synchronize : false,
       logging : true,
-      migrations: [__dirname + '/migrations/*.ts'],
+      migrations: [__dirname + "/migrations/*.ts"],
     })
   ],
   controllers: [AppController],

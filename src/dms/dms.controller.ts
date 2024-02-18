@@ -1,9 +1,9 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
-import { ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
+import { ApiParam, ApiQuery, ApiTags } from "@nestjs/swagger";
 
 
 @ApiTags("DM")
-@Controller('api/workspaces/:url/dms')
+@Controller("api/workspaces/:url/dms")
 export class DmsController {
 
   @ApiParam({

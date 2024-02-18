@@ -1,11 +1,11 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
-import { JoinRequserDto } from './dto/join.requser.dto';
-import { UsersService } from './users.service';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { UserDto } from 'src/common/dto/user.dto';
+import { Body, Controller, Get, Post, Req } from "@nestjs/common";
+import { JoinRequserDto } from "./dto/join.requser.dto";
+import { UsersService } from "./users.service";
+import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { UserDto } from "src/common/dto/user.dto";
 
 @ApiTags("USER")
-@Controller('api/users')
+@Controller("api/users")
 export class UsersController {
   constructor(private userService: UsersService){
   }
@@ -13,7 +13,7 @@ export class UsersController {
   @ApiResponse({
     status: 200,
     description: "성공",
-    // type: () => UserDto,
+    type: UserDto
   })
   @ApiOperation({
     summary : "유저 정보 조회"
@@ -26,8 +26,8 @@ export class UsersController {
     summary : "회원가입"
   })
   @Post()
-  postUsers(@Body() data: JoinRequserDto){
-    this.userService.postUsers(data.email, data.nickname, data.password);
+  async join(@Body() data: JoinRequserDto){
+    await this.userService.join(data.email, data.nickname, data.password);
   }
 
   @ApiOperation({
