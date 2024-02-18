@@ -1,31 +1,10 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { PickType } from "@nestjs/swagger";
+import { Users } from "src/entities/Users";
 
-export class JoinRequserDto {
-
-  @IsEmail()
-  @ApiProperty({
-    example: 'Nest@gmail.com',
-    description: "이메일",
-    required: true
-  })
-  public email: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty({
-    example: "김만규",
-    description: "닉네임",
-    required: true
-  })
-  public nickname: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty({
-    example: "nodejsbook",
-    description: "비밀번호",
-    required: true
-  })
-  public password: string;
+export class JoinRequserDto extends PickType(Users, [
+  "email", 
+  "nickname", 
+  "password",
+  ] as const){
 }
+// PickType는 swagger에 있는 함수로써 Users(다른클래스 가능)에 있는 칼럼들을 적용시킬수있다

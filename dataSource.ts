@@ -1,19 +1,19 @@
-import { DataSource } from 'typeorm';
-import dotenv from 'dotenv';
-import { ChannelChats } from './src/entities/ChannelChats';
-import { ChannelMembers } from './src/entities/ChannelMembers';
-import { Channels } from './src/entities/Channels';
-import { DMs } from './src/entities/DMs';
-import { Mentions } from './src/entities/Mentions';
-import { Users } from './src/entities/Users';
-import { WorkspaceMembers } from './src/entities/WorkspaceMembers';
-import { Workspaces } from './src/entities/Workspaces';
+import { DataSource } from "typeorm";
+import dotenv from "dotenv";
+import { ChannelChats } from "./src/entities/ChannelChats";
+import { ChannelMembers } from "./src/entities/ChannelMembers";
+import { Channels } from "./src/entities/Channels";
+import { DMs } from "./src/entities/DMs";
+import { Mentions } from "./src/entities/Mentions";
+import { Users } from "./src/entities/Users";
+import { WorkspaceMembers } from "./src/entities/WorkspaceMembers";
+import { Workspaces } from "./src/entities/Workspaces";
 
 dotenv.config();
 
 const dataSource = new DataSource({
-  type: 'mysql',
-  host: 'localhost',
+  type: "mysql",
+  host: "localhost",
   port: 3306,
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
@@ -28,7 +28,7 @@ const dataSource = new DataSource({
     WorkspaceMembers,
     Workspaces,
   ],
-  migrations: [__dirname + '/src/migrations/*.ts'],
+  migrations: [__dirname + "/src/migrations/*.ts"],
   synchronize: false,
   logging: true,
 });

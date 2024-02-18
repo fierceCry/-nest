@@ -9,26 +9,26 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
-import { ChannelChats } from './ChannelChats';
-import { ChannelMembers } from './ChannelMembers';
-import { Users } from './Users';
-import { Workspaces } from './Workspaces';
+} from "typeorm";
+import { ChannelChats } from "./ChannelChats";
+import { ChannelMembers } from "./ChannelMembers";
+import { Users } from "./Users";
+import { Workspaces } from "./Workspaces";
 
-@Index('WorkspaceId', ['WorkspaceId'], {})
-@Entity({ schema: 'sleact' })
+@Index("WorkspaceId", ["WorkspaceId"], {})
+@Entity({ schema: "sleact" })
 export class Channels {
-  @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
+  @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
 
-  @Column('varchar', { name: 'name', length: 30 })
+  @Column("varchar", { name: "name", length: 30 })
   name: string;
 
-  @Column('tinyint', {
-    name: 'private',
+  @Column("tinyint", {
+    name: "private",
     nullable: true,
     width: 1,
-    default: () => "'0'",
+    default: () => "'O'",
   })
   private: boolean | null;
 
@@ -38,14 +38,14 @@ export class Channels {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @Column('int', { name: 'WorkspaceId', nullable: true })
+  @Column("int", { name: "WorkspaceId", nullable: true })
   WorkspaceId: number | null;
 
   @OneToMany(() => ChannelChats, (channelchats) => channelchats.Channel)
   ChannelChats: ChannelChats[];
 
   @OneToMany(() => ChannelMembers, (channelMembers) => channelMembers.Channel, {
-    cascade: ['insert'],
+    cascade: ["insert"],
   })
   ChannelMembers: ChannelMembers[];
 
@@ -53,9 +53,9 @@ export class Channels {
   Members: Users[];
 
   @ManyToOne(() => Workspaces, (workspaces) => workspaces.Channels, {
-    onDelete: 'SET NULL',
-    onUpdate: 'CASCADE',
+    onDelete: "SET NULL",
+    onUpdate: "CASCADE",
   })
-  @JoinColumn([{ name: 'WorkspaceId', referencedColumnName: 'id' }])
+  @JoinColumn([{ name: "WorkspaceId", referencedColumnName: "id" }])
   Workspace: Workspaces;
 }
