@@ -19,7 +19,7 @@ import { WorkspaceMembers } from "./WorkspaceMembers";
 import { Workspaces } from "./Workspaces";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsEmail, IsNotEmpty, IsString } from "class-validator";
-@Index("email", ["email"], { unique: true })
+Index("email", ["email"], { unique: true })
 @Entity({ schema: "sleact", name: "users" })
 export class Users {
   @ApiProperty({
