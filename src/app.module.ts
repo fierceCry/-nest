@@ -19,7 +19,7 @@ import { WorkspaceMembers } from "./entities/WorkspaceMembers";
 import { Workspaces } from "./entities/Workspaces";
 import dotenv from "dotenv";
 import { AuthModule } from "./auth/auth.module";
-
+import { EventsGateway } from "./events/events.gateway";
 dotenv.config();
 
 @Module({
@@ -30,6 +30,7 @@ dotenv.config();
      ChannelsModule, 
      DMsModule,
      AuthModule,
+     EventsGateway,
      TypeOrmModule.forRoot({
       type : "mysql",
       host : "localhost",
@@ -37,7 +38,7 @@ dotenv.config();
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities : [    
+      entities : [
         ChannelChats,
         ChannelMembers,
         Channels,
