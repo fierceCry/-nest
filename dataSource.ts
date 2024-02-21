@@ -32,4 +32,5 @@ const dataSource = new DataSource({
   synchronize: false,
   logging: true,
 });
+console.log(dataSource);
 export default dataSource;

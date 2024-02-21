@@ -3,6 +3,9 @@ import { AppModule } from "./app.module";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { ValidationPipe } from "@nestjs/common";
 import { HttpExceptionFilter } from "./httpException.filter";
+import passport from 'passport';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
 
 declare const module: any;
 
@@ -13,13 +16,27 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   const config = new DocumentBuilder()
-  .setTitle("Slack Nest API")
-  .setDescription("The cats API description")
-  .setVersion("1.0")
-  .build();
+    .setTitle("Slack Nest API")
+    .setDescription("The cats API description")
+    .setVersion("1.0")
+    .build();
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("api", app, document);
+ 
+  app.use(cookieParser());
+  app.use(
+    session({
+      resave: false,
+      saveUninitialized: false,
+      secret: process.env.COOKIE_SECRET,
+      cookie: {
+        httpOnly: true,
+      },
+    }),
+  );
+  app.use(passport.initialize());
+  app.use(passport.session());
 
   await app.listen(port);
   console.log(`listening on port ${port}`)

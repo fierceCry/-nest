@@ -28,7 +28,7 @@ export class Channels {
     name: "private",
     nullable: true,
     width: 1,
-    default: () => "'O'",
+    default: () => "'0'",
   })
   private: boolean | null;
 
