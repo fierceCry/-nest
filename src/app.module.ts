@@ -7,7 +7,7 @@ import { MorganModule, MorganInterceptor } from "nest-morgan";
 import { UsersModule } from "./users/users.module";
 import { WorkspacesModule } from "./workspaces/workspaces.module";
 import { ChannelsModule } from "./channels/channels.module";
-import { DmsModule } from "./dms/dms.module";
+import { DMsModule } from "./dms/dms.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ChannelChats } from "./entities/ChannelChats";
 import { ChannelMembers } from "./entities/ChannelMembers";
@@ -18,6 +18,7 @@ import { Users } from "./entities/Users";
 import { WorkspaceMembers } from "./entities/WorkspaceMembers";
 import { Workspaces } from "./entities/Workspaces";
 import dotenv from "dotenv";
+import { AuthModule } from "./auth/auth.module";
 
 dotenv.config();
 
@@ -27,7 +28,8 @@ dotenv.config();
      UsersModule, 
      WorkspacesModule, 
      ChannelsModule, 
-     DmsModule,
+     DMsModule,
+     AuthModule,
      TypeOrmModule.forRoot({
       type : "mysql",
       host : "localhost",

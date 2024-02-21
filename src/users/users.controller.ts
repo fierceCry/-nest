@@ -1,9 +1,12 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Post, UseGuards } from "@nestjs/common";
 import { JoinRequserDto } from "./dto/join.requser.dto";
 import { UsersService } from "./users.service";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { UserDto } from "src/common/dto/user.dto";
 import { LocalAuthGuard } from "src/auth/loca-auth.guard";
+import { LoggedInGuard } from "src/auth/logged-in.guard";
+import { NotLoggedInGuard } from "src/auth/not-logged-in.guard";
+import { User } from "src/common/decorators/user.decorator";
 
 @ApiTags("USER")
 @Controller("api/users")
@@ -20,9 +23,11 @@ export class UsersController {
     summary : "유저 정보 조회"
   })
   @Get()
-  getUser(@Req() req){
+  getUser(@User() user){
+    return user || false;
   }
 
+  @UseGuards(new NotLoggedInGuard())
   @ApiOperation({
     summary : "회원가입"
   })
@@ -39,7 +44,8 @@ export class UsersController {
   logIn(){
     
   }
-
+ 
+  @UseGuards(new LoggedInGuard())
   @ApiOperation({
     summary : "로그아웃"
   })
